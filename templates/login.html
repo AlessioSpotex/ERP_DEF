@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Stili e Icone -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon_ares.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Pagina di Login Multi-Tenant -->
+    <section class="login-page">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-logo">
+                    <img src="{{ url_for('static', filename='media/ares_logo_white.png') }}" alt="Ares Management Logo">
+                </div>
+                <h2 class="login-title">Accedi a </h2>
+                
+                <!-- Form di Login -->
+                <form action="/login" method="POST" class="login-form">
+                    <input type="text" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit" class="btn primary large">Accedi</button>
+                </form>
+
+
+                <p class="login-footer">
+                    Non hai un account? <a href="#" class="signup-link">Contatta il nostro Ufficio Vendite</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Immagine di sfondo animata -->
+        <div class="animated-background"></div>
+
+        <!-- Elementi decorativi animati -->
+        <div class="floating-elements">
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+        </div>
+    </section>
+
+    <!-- Script per ottenere il nome del tenant dall'URL -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const pathParts = window.location.pathname.split('/');
+            const tenantName = pathParts[1] || 'Ares Management';
+            document.getElementById('tenantName').textContent = tenantName.charAt(0).toUpperCase() + tenantName.slice(1);
+        });
+    </script>
+</body>
+</html>

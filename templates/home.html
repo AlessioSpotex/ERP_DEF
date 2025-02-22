@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon_ares.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <!-- Logo dell'ERP -->
+        <a href="/home" class="logo">
+            <img src="{{ url_for('static', filename='images/ares_logo_white.png') }}" alt="Ares Management Logo">
+        </a>
+    
+        <!-- Link di navigazione -->
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#features">Funzioni</a></li>
+            <li><a href="#why-choose">Perché Ares</a></li>
+            <li><a href="#pricing">Prezzi</a></li>
+            <li><a href="#start-now">Inizia Ora</a></li>
+            <li><a href="{{ url_for('public.login') }}" class="btn primary">Accedi</a></li>
+        </ul>
+    
+        <!-- Menu Hamburger per mobile -->
+        <div class="menu-icon" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+    
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+            const menuIcon = document.querySelector('.menu-icon');
+            menuIcon.classList.toggle('open');
+        }
+    </script>
+
+
+<!---------------------------------------------- Hero Section ---------------------------------------------->
+<!-- Sezione Hero -->
+<section class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            Benvenuto in <span>Ares Management</span>
+        </h1>
+        <p class="hero-subtitle">
+            Trasforma la tua azienda con un ERP dinamico, modulare e all'avanguardia.
+        </p>
+        <a href="#features" class="btn primary large">Scopri di più</a>
+    </div>
+
+    <!-- Aggiunta di animazioni con particelle -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+</section>
+
+<!-- Sezione Funzionalità Principali -->
+<section class="features" id="features">
+    <div class="container">
+        <h2 class="section-title">Funzionalità Principali</h2>
+        <p class="section-subtitle">
+            Scopri tutte le funzionalità che rendono Ares Management la scelta migliore per il tuo business.
+        </p>
+
+        <div class="features-grid">
+            <!-- Card Funzionalità -->
+            <div class="feature-card">
+                <div class="icon">
+                    <i class="fas fa-puzzle-piece"></i>
+                </div>
+                <h3>Modularità Completa</h3>
+                <p>Crea e personalizza i moduli della tua azienda con pochi click.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">
+                    <i class="fas fa-users-cog"></i>
+                </div>
+                <h3>Gestione Multi-Tenant</h3>
+                <p>Offri accessi personalizzati e un'esperienza unica per ogni azienda.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Dashboard Dinamiche</h3>
+                <p>Monitora in tempo reale i dati critici della tua attività.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3>Integrazioni Potenti</h3>
+                <p>Collega facilmente il tuo ERP con altri strumenti aziendali.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Sicurezza Avanzata</h3>
+                <p>Proteggi i tuoi dati con le ultime tecnologie di sicurezza.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Automazione Processi</h3>
+                <p>Risparmia tempo automatizzando le attività ripetitive.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sezione "Perché Scegliere Ares Management" -->
+<section class="why-choose" id="why-choose">
+    <div class="container">
+        <h2 class="section-title">Perché Scegliere Ares Management?</h2>
+        <p class="section-subtitle">
+            Scopri come Ares Management può trasformare la gestione della tua azienda con una soluzione ERP dinamica, 
+            flessibile e adatta a diversi settori.
+        </p>
+
+        <div class="choose-grid">
+            <!-- Card Dinamiche per i Target di Aziende -->
+            <div class="choose-card" data-target="PMI e Start-up">
+                <div class="icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h3>Ideale per Start-up</h3>
+                <p>Strumenti semplici e modulari per crescere velocemente.</p>
+            </div>
+
+            <div class="choose-card" data-target="Grandi Aziende">
+                <div class="icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3>Perfetto per Grandi Aziende</h3>
+                <p>Gestione avanzata dei processi aziendali e integrazioni potenti.</p>
+            </div>
+
+            <div class="choose-card" data-target="E-commerce">
+                <div class="icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3>Supporto per E-commerce</h3>
+                <p>Automazione delle vendite e gestione del magazzino integrata.</p>
+            </div>
+
+            <div class="choose-card" data-target="Società di Servizi">
+                <div class="icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Adatto a Società di Servizi</h3>
+                <p>Monitoraggio dei progetti e automazione dei flussi di lavoro.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sezione Prezzi -->
+<section class="pricing" id="pricing">
+    <div class="container">
+        <h2 class="section-title">Piani Tariffari</h2>
+        <p class="section-subtitle">
+            Scegli il piano che meglio si adatta alle esigenze della tua azienda. Prezzo indicato per utente al mese.
+        </p>
+
+        <!-- Griglia dei Piani Tariffari -->
+        <div class="pricing-grid">
+            <!-- Piano Base -->
+            <div class="pricing-card">
+                <h3>Base</h3>
+                <p class="price">€10<span>/utente/mese</span></p>
+                <ul>
+                    <li>Fino a 10 utenti</li>
+                    <li>Moduli base inclusi</li>
+                    <li>Supporto via email</li>
+                    <li>1 GB di spazio cloud</li>
+                </ul>
+                <a href="#" class="btn primary">Contattaci</a>
+            </div>
+
+            <!-- Piano Professional -->
+            <div class="pricing-card highlight">
+                <h3>Professional</h3>
+                <p class="price">€25<span>/utente/mese</span></p>
+                <ul>
+                    <li>Utenti illimitati</li>
+                    <li>Moduli avanzati inclusi</li>
+                    <li>Supporto telefonico e via email</li>
+                    <li>10 GB di spazio cloud</li>
+                    <li>Dashboard personalizzabile</li>
+                </ul>
+                <a href="#" class="btn primary">Contattaci</a>
+            </div>
+
+            <!-- Piano Enterprise -->
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <p class="price">€50<span>/utente/mese</span></p>
+                <ul>
+                    <li>Utenti illimitati</li>
+                    <li>Moduli personalizzati</li>
+                    <li>Supporto dedicato 24/7</li>
+                    <li>Spazio cloud illimitato</li>
+                    <li>API e integrazioni avanzate</li>
+                    <li>Formazione personalizzata</li>
+                </ul>
+                <a href="#" class="btn primary">Contattaci</a>
+            </div>
+        </div>
+
+        <!-- Tabella Comparativa delle Funzionalità -->
+        <div class="features-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Funzionalità</th>
+                        <th>Base</th>
+                        <th>Professional</th>
+                        <th>Enterprise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Utenti</td>
+                        <td>Fino a 10</td>
+                        <td>Illimitati</td>
+                        <td>Illimitati</td>
+                    </tr>
+                    <tr>
+                        <td>Supporto</td>
+                        <td>Email</td>
+                        <td>Telefono & Email</td>
+                        <td>Supporto dedicato 24/7</td>
+                    </tr>
+                    <tr>
+                        <td>Moduli Inclusi</td>
+                        <td>Base</td>
+                        <td>Avanzati</td>
+                        <td>Personalizzati</td>
+                    </tr>
+                    <tr>
+                        <td>Spazio Cloud</td>
+                        <td>1 GB</td>
+                        <td>10 GB</td>
+                        <td>Illimitato</td>
+                    </tr>
+                    <tr>
+                        <td>Integrazioni</td>
+                        <td>Standard</td>
+                        <td>Personalizzabile</td>
+                        <td>Avanzate con API</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Sezione "Inizia Ora" -->
+<section class="start-now" id="start-now">
+    <div class="container">
+        <div class="start-content">
+            <h2 class="section-title">Inizia Ora con Ares Management</h2>
+            <p class="section-subtitle">
+                Entra a far parte di un ecosistema esclusivo. Contatta il nostro ufficio vendite per scoprire come 
+                Ares Management può trasformare la tua azienda.
+            </p>
+            <a href="" class="btn primary large">Contatta il nostro Ufficio Vendite</a>
+        </div>
+
+        <!-- Immagine di sfondo animata -->
+        <div class="animated-background"></div>
+
+        <!-- Elementi decorativi animati -->
+        <div class="floating-elements">
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+        </div>
+    </div>
+</section>
+
+<!-------------------------------------------------- Footer -------------------------------------------------->
+<footer class="footer">
+    <div class="container">
+        <!-- Sezione superiore del footer -->
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img src="{{ url_for('static', filename='images/ares_logo_white.png') }}" alt="Ares Management Logo">
+            </div>
+
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#news">News</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Developers</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-socials">
+                <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <!-- Sezione inferiore del footer -->
+        <div class="footer-bottom">
+            <p>&copy; <span id="currentYear"></span> Ares Management. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Script per impostare dinamicamente l'anno corrente -->
+<script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
+
+<script>
+    function toggleMenu() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.toggle('active');
+        const menuIcon = document.querySelector('.menu-icon');
+        menuIcon.classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>
