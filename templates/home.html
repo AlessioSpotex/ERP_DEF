@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon_ares.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -22,7 +22,7 @@
             <li><a href="#why-choose">Perché Ares</a></li>
             <li><a href="#pricing">Prezzi</a></li>
             <li><a href="#start-now">Inizia Ora</a></li>
-            <li><a href="{{ url_for('public.login') }}" class="btn primary">Accedi</a></li>
+            <li><a href="/login" class="btn primary">Accedi</a></li>
         </ul>
     
         <!-- Menu Hamburger per mobile -->

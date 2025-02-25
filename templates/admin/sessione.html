@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caricamento Sessione...</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 flex items-center justify-center min-h-screen text-white">
+
+    <div class="text-center">
+        <div class="mb-6">
+            <div class="w-16 h-16 border-4 border-yellow-500 border-t-transparent border-solid rounded-full animate-spin mx-auto"></div>
+        </div>
+        <h1 class="text-2xl mb-4">Caricamento risorse...</h1>
+        <p id="loading-text" class="text-yellow-500 mb-8">Creazione di una sessione sicura...</p>
+    </div>
+
+    <!-- Script per il caricamento dinamico -->
+    <script>
+        const loadingTexts = [
+            "Caricamento risorse...",
+            "Creazione di una sessione sicura...",
+            "La tua posizione è sicura...",
+            "La sessione avrà una durata di 2 ore..."
+        ];
+
+        let index = 0;
+        const loadingTextElement = document.getElementById('loading-text');
+
+        setInterval(() => {
+            loadingTextElement.textContent = loadingTexts[index];
+            index = (index + 1) % loadingTexts.length;
+        }, 1000);
+
+        // Reindirizzamento automatico alla dashboard dopo pochi secondi
+        setTimeout(() => {
+            window.location.href = `/{{ tenant_name }}/admin/pages/home`;
+        }, 5000); // 5 secondi di caricamento
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ERP DEF{% endblock %}</title>
+
+    <!-- Favicon e Icone -->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon_ares.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+</head>
+<body class="bg-gradient-to-br from-black to-gray-900 text-white min-h-screen flex overflow-hidden">
+
+    <!-- Sidebar Fissa -->
+    {% include 'admin/ui/sidebar.html' %}
+    {% set tenant_name = tenant_name or session.get('tenant_name') %}
+
+    <!-- Contenuto Principale con Scorrimento Interno -->
+    <main class="flex-1 h-screen flex flex-col">
+        <!-- Area Scrollabile Interna -->
+        <section class="flex-1 overflow-y-auto p-6">
+            {% block content %}
+            <!-- Il contenuto specifico delle pagine verrà iniettato qui -->
+            {% endblock %}
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

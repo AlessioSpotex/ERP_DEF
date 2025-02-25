@@ -14,9 +14,14 @@ class User(db.Model):
     password = db.Column(db.String(255), nullable=False)
     role = db.Column(db.String(50), default=UserRole.USER, nullable=False)
     is_active = db.Column(db.Boolean, default=True)
-    
+
+    # Nuovi campi aggiunti
+    nome = db.Column(db.String(100), nullable=False)
+    cognome = db.Column(db.String(100), nullable=False)
+    profilo_foto = db.Column(db.String(255), default='images/default_avatar.png')
+
     # Collegamento con il Tenant
     tenant_id = db.Column(db.Integer, db.ForeignKey('tenants.id'), nullable=False)
 
     def __repr__(self):
-        return f'<User {self.username} - Role: {self.role}>'
+        return f'<User {self.username} ({self.nome} {self.cognome}) - Role: {self.role}>'

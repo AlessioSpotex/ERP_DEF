@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #141414;
+    font-family: 'Arial', sans-serif;
+    color: #f0f0f0;
+}
+
+.loading-container {
+    text-align: center;
+}
+
+.loading-bar {
+    width: 300px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+}
+
+.progress {
+    height: 100%;
+    width: 0;
+    background-color: #fcc630;
+    transition: width 0.4s;
+}
+
+#loading-text {
+    font-size: 18px;
+    color: #ddd;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}

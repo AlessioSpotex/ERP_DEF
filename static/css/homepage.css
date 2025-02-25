@@ -1,0 +1,1275 @@
+/* ================================
+    Global Styles
+================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f6f9;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* ================================
+    Colors
+================================ */
+:root {
+    --primary-color: #fcc630;
+    --secondary-color: #5a5c5b;
+    --text-color: #000000;
+    --background-color: #f4f6f9;
+    --white: #ffffff;
+    --danger-color: #e74c3c;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+}
+
+/* ================================
+    Layout
+================================ */
+.container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.grid {
+    display: grid;
+    gap: 20px;
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* ================================
+    Header
+================================ */
+.header {
+    background-color: var(--white);
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: calc(100% - 250px);
+    z-index: 10;
+    left: 250px;
+}
+
+.header h1 {
+    font-size: 24px;
+    color: var(--text-color);
+}
+
+.header .user-menu {
+    display: flex;
+    align-items: center;
+}
+
+.header .user-menu img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+/* ================================
+    Sidebar
+================================ */
+.sidebar {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    width: 250px;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    color: var(--white);
+    text-decoration: none;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: var(--primary-color);
+}
+
+/* ================================
+    Buttons
+================================ */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+}
+
+.btn.primary {
+    background-color: var(--primary-color);
+}
+
+.btn.secondary {
+    background-color: var(--secondary-color);
+}
+
+.btn.danger {
+    background-color: var(--danger-color);
+}
+
+.btn.success {
+    background-color: var(--success-color);
+}
+
+.btn.warning {
+    background-color: var(--warning-color);
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* ================================
+    Cards
+================================ */
+.card {
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.card p {
+    color: #666;
+}
+
+/* ================================
+    Tables
+================================ */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.table th {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table tbody tr:hover {
+    background-color: #eaeaea;
+}
+
+/* ================================
+    Forms
+================================ */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+input[type="submit"],
+button[type="submit"] {
+    background-color: var(--primary-color);
+    color: var(--white);
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+input[type="submit"]:hover,
+button[type="submit"]:hover {
+    background-color: #e1b523;
+}
+
+/* ================================
+    Alerts & Notifications
+================================ */
+.alert {
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+    color: var(--white);
+    font-weight: bold;
+}
+
+.alert.success {
+    background-color: var(--success-color);
+}
+
+.alert.warning {
+    background-color: var(--warning-color);
+}
+
+.alert.error {
+    background-color: var(--danger-color);
+}
+
+
+/* ================================
+    Navbar Moderna e Pulita
+================================ */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: 0.4s ease-out;
+    backdrop-filter: blur(10px) brightness(1.1);
+    -webkit-backdrop-filter: blur(10px) brightness(1.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    z-index: 100;
+    background-color: rgba(20, 20, 20, 0.8);
+}
+
+.navbar.is-hidden {
+    transform: translateY(-100%);
+}
+
+/* ================================
+    Logo dell'ERP
+================================ */
+.logo img {
+    height: 50px;
+    max-width: 150px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(252, 198, 48, 0.5));
+    transition: all 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.1);
+}
+
+/* ================================
+    Link di Navigazione
+================================ */
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-weight: 500;
+    border-radius: 8px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.nav-links a:hover {
+    background: linear-gradient(90deg, #fcc630, #5a5c5b);
+    color: #000;
+    box-shadow: 0 4px 15px rgba(252, 198, 48, 0.5);
+}
+
+/* ================================
+    Pulsante "Accedi"
+================================ */
+.btn.primary {
+    padding: 10px 20px;
+    background-color: #fcc630;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(252, 198, 48, 0.5);
+}
+
+.btn.primary:hover {
+    box-shadow: 0 6px 20px rgba(252, 198, 48, 0.8);
+    transform: translateY(-3px);
+}
+
+/* ================================
+    Menu Icon (Hamburger)
+================================ */
+.menu-icon {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 150;
+    margin-left: 20px;
+}
+
+.menu-icon span {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.menu-icon.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-icon.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-icon.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ================================
+    Navbar Mobile
+================================ */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 900px;
+        width: 250px;
+        background-color: rgba(20, 20, 20, 0.9);
+        flex-direction: column;
+        padding-top: 80px;
+        transition: right 0.4s ease;
+        box-shadow: -4px 0 8px rgba(0, 0, 0, 0.4);
+        z-index: 100;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+        border-radius: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-links a:hover {
+        background-color: #fcc630;
+        color: #000;
+    }
+}
+
+/* ================================
+    Sezione Hero Moderna e Dark
+================================ */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1e1e1e, #000);
+    z-index: 1;
+    padding: 0 20px;
+}
+
+.hero-content {
+    z-index: 10;
+    max-width: 800px;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.hero-title {
+    font-size: 64px;
+    line-height: 1.2;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #fcc630;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-title span {
+    color: #5a5c5b;
+    position: relative;
+    display: inline-block;
+    animation: textSlide 2s ease-out infinite alternate;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    color: #ddd;
+    margin-bottom: 40px;
+    animation: fadeInUp 2s ease-out;
+}
+
+/* Pulsante "Scopri di più" */
+.btn.primary.large {
+    padding: 15px 30px;
+    font-size: 18px;
+    color: #000;
+    background-color: #fcc630;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(252, 198, 48, 0.5);
+    transition: all 0.3s;
+    animation: fadeIn 2.5s ease-out;
+}
+
+.btn.primary.large:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(252, 198, 48, 0.8);
+}
+
+/* ================================
+    Effetti con Particelle Animate
+================================ */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.particle {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #fcc630;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(252, 198, 48, 0.7);
+    animation: float 10s infinite linear;
+    opacity: 0.8;
+}
+
+/* Generazione di particelle animate */
+.particle:nth-child(1) { top: 20%; left: 15%; animation-duration: 12s; animation-delay: -2s; }
+.particle:nth-child(2) { top: 80%; left: 25%; animation-duration: 15s; animation-delay: -4s; }
+.particle:nth-child(3) { top: 50%; left: 50%; animation-duration: 10s; animation-delay: -1s; }
+.particle:nth-child(4) { top: 90%; left: 70%; animation-duration: 18s; animation-delay: -6s; }
+.particle:nth-child(5) { top: 10%; left: 80%; animation-duration: 14s; animation-delay: -3s; }
+.particle:nth-child(6) { top: 60%; left: 10%; animation-duration: 20s; animation-delay: -5s; }
+.particle:nth-child(7) { top: 30%; left: 60%; animation-duration: 11s; animation-delay: -7s; }
+.particle:nth-child(8) { top: 70%; left: 90%; animation-duration: 16s; animation-delay: -8s; }
+.particle:nth-child(9) { top: 40%; left: 30%; animation-duration: 13s; animation-delay: -9s; }
+.particle:nth-child(10) { top: 50%; left: 85%; animation-duration: 19s; animation-delay: -10s; }
+
+/* ================================
+    Animazioni Keyframes
+================================ */
+@keyframes float {
+    0% { transform: translateY(0) translateX(0); opacity: 1; }
+    50% { transform: translateY(-50px) translateX(30px); opacity: 0.6; }
+    100% { transform: translateY(0) translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes textSlide {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+/* ================================
+    Responsività Mobile
+================================ */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 48px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+    }
+
+    .btn.primary.large {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}
+
+/* ================================
+    Footer Moderno e Dinamico
+================================ */
+.footer {
+    background-color: #1e1e1e;
+    color: #fff;
+    padding: 40px 20px;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.footer .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Sezione Superiore del Footer */
+.footer-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-logo img {
+    width: 180px;
+    filter: drop-shadow(0 0 8px rgba(252, 198, 48, 0.5));
+    transition: transform 0.3s;
+}
+
+.footer-logo img:hover {
+    transform: scale(1.1);
+}
+
+/* Link del Footer */
+.footer-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #fcc630;
+}
+
+/* Icone Social */
+.footer-socials {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-socials a {
+    color: #fff;
+    transition: all 0.3s;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-socials a:hover {
+    color: #000;
+    background-color: #fcc630;
+    box-shadow: 0 4px 15px rgba(252, 198, 48, 0.5);
+}
+
+/* Sezione Inferiore del Footer */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #ccc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* ================================
+    Sezione Funzionalità Principali
+================================ */
+.features {
+    background-color: #1e1e1e;
+    color: #fff;
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 48px;
+    margin-bottom: 10px;
+    color: #fcc630;
+    position: relative;
+    z-index: 10;
+    animation: fadeInDown 1s ease-out;
+}
+
+.section-subtitle {
+    font-size: 20px;
+    color: #ddd;
+    margin-bottom: 60px;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Griglia delle Funzionalità */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Card delle Funzionalità */
+.feature-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 40px 20px;
+    border-radius: 10px;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(6px);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 1.2s ease-out;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+    border-color: #fcc630;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(252, 198, 48, 0.2), transparent 60%);
+    transition: all 0.7s;
+    transform: scale(0);
+    z-index: 0;
+}
+
+.feature-card:hover::before {
+    transform: scale(1);
+}
+
+.icon {
+    font-size: 50px;
+    color: #fcc630;
+    margin-bottom: 20px;
+    transition: color 0.3s;
+}
+
+.feature-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.feature-card p {
+    font-size: 16px;
+    color: #ddd;
+}
+
+/* ================================
+    Animazioni
+================================ */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ================================
+    Responsività Mobile
+================================ */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 36px;
+    }
+
+    .section-subtitle {
+        font-size: 18px;
+    }
+
+    .icon {
+        font-size: 40px;
+    }
+
+    .feature-card h3 {
+        font-size: 20px;
+    }
+
+    .feature-card p {
+        font-size: 14px;
+    }
+}
+
+/* ================================
+    Sezione "Perché Scegliere Ares Management"
+================================ */
+.why-choose {
+    background: linear-gradient(135deg, #1e1e1e, #000);
+    color: #fff;
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 48px;
+    margin-bottom: 10px;
+    color: #fcc630;
+    animation: fadeInDown 1s ease-out;
+}
+
+.section-subtitle {
+    font-size: 20px;
+    color: #ddd;
+    margin-bottom: 60px;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Griglia delle Card */
+.choose-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Card Dinamiche */
+.choose-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 40px 20px;
+    border-radius: 10px;
+    transition: all 0.4s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(6px);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 1.2s ease-out;
+    cursor: pointer;
+}
+
+.choose-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+    border-color: #fcc630;
+}
+
+.choose-card::before {
+    content: attr(data-target);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #fcc630;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.choose-card:hover::before {
+    opacity: 1;
+}
+
+.icon {
+    font-size: 50px;
+    color: #fcc630;
+    margin-bottom: 20px;
+    transition: color 0.3s;
+}
+
+.choose-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.choose-card p {
+    font-size: 16px;
+    color: #ddd;
+}
+
+/* ================================
+    Animazioni
+================================ */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ================================
+    Responsività Mobile
+================================ */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 36px;
+    }
+
+    .section-subtitle {
+        font-size: 18px;
+    }
+
+    .icon {
+        font-size: 40px;
+    }
+
+    .choose-card h3 {
+        font-size: 20px;
+    }
+
+    .choose-card p {
+        font-size: 14px;
+    }
+}
+
+/* ================================
+    Sezione Prezzi Moderna
+================================ */
+.pricing {
+    background-color: #1e1e1e;
+    color: #fff;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 48px;
+    margin-bottom: 10px;
+    color: #fcc630;
+    animation: fadeInDown 1s ease-out;
+}
+
+.section-subtitle {
+    font-size: 20px;
+    color: #ddd;
+    margin-bottom: 60px;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Griglia dei Piani Tariffari */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+/* Card dei Piani Tariffari */
+.pricing-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px 20px;
+    border-radius: 10px;
+    transition: all 0.4s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1.2s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-card h3 {
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.price {
+    font-size: 36px;
+    color: #fcc630;
+    margin-bottom: 20px;
+}
+
+.price span {
+    font-size: 18px;
+    color: #ddd;
+}
+
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.pricing-card ul li {
+    font-size: 16px;
+    color: #ddd;
+    margin-bottom: 10px;
+}
+
+.highlight {
+    border-color: #fcc630;
+    transform: scale(1.05);
+}
+
+/* Tabella Comparativa */
+.features-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+}
+
+.features-table th, .features-table td {
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+    color: #ddd;
+}
+
+.features-table th {
+    background-color: #5a5c5b;
+    color: #fff;
+}
+
+.features-table tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Animazioni */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 36px;
+    }
+}
+
+/* ================================
+    Sezione "Inizia Ora"
+================================ */
+.start-now {
+    position: relative;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    color: #fff;
+    background: linear-gradient(135deg, #1e1e1e, #000);
+    z-index: 1;
+    padding: 0 20px;
+}
+
+.start-content {
+    z-index: 10;
+    max-width: 800px;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.section-title {
+    font-size: 48px;
+    line-height: 1.2;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #fcc630;
+    position: relative;
+}
+
+.section-subtitle {
+    font-size: 20px;
+    color: #ddd;
+    margin-bottom: 40px;
+    animation: fadeInUp 2s ease-out;
+}
+
+/* Pulsante "Contatta il nostro Ufficio Vendite" */
+.btn.primary.large {
+    padding: 15px 30px;
+    font-size: 18px;
+    color: #000;
+    background-color: #fcc630;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(252, 198, 48, 0.5);
+    transition: all 0.3s;
+    animation: fadeIn 2.5s ease-out;
+    cursor: pointer;
+}
+
+.btn.primary.large:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(252, 198, 48, 0.8);
+}
+
+/* ================================
+    Immagine di Sfondo Animata
+================================ */
+.animated-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/media/background.webp') no-repeat center center/cover;
+    filter: blur(10px) brightness(0.7);
+    animation: backgroundMove 30s infinite linear;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+@keyframes backgroundMove {
+    0% { transform: scale(1) translateX(0); }
+    50% { transform: scale(1.1) translateX(-10%); }
+    100% { transform: scale(1) translateX(0); }
+}
+
+/* ================================
+    Elementi Decorativi Animati
+================================ */
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(252, 198, 48, 0.5);
+    box-shadow: 0 0 15px rgba(252, 198, 48, 0.8);
+    animation: float 10s infinite ease-in-out;
+    opacity: 0.7;
+}
+
+/* Posizioni ed animazioni dei cerchi */
+.circle:nth-child(1) {
+    width: 60px;
+    height: 60px;
+    top: 20%;
+    left: 10%;
+    animation-duration: 15s;
+}
+
+.circle:nth-child(2) {
+    width: 80px;
+    height: 80px;
+    top: 50%;
+    left: 80%;
+    animation-duration: 18s;
+}
+
+.circle:nth-child(3) {
+    width: 100px;
+    height: 100px;
+    top: 80%;
+    left: 30%;
+    animation-duration: 20s;
+}
+
+.circle:nth-child(4) {
+    width: 40px;
+    height: 40px;
+    top: 10%;
+    left: 70%;
+    animation-duration: 12s;
+}
+
+.circle:nth-child(5) {
+    width: 50px;
+    height: 50px;
+    top: 60%;
+    left: 50%;
+    animation-duration: 17s;
+}
+
+/* Animazione di galleggiamento */
+@keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-20px) translateX(10px); }
+}
+
+/* ================================
+    Animazioni Keyframes
+================================ */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ================================
+    Responsività Mobile
+================================ */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 36px;
+    }
+
+    .section-subtitle {
+        font-size: 18px;
+    }
+
+    .btn.primary.large {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}

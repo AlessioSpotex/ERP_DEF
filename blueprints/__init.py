@@ -5,6 +5,7 @@ from .rt_function import function_bp
 from .rt_api import api_bp
 from .rt_viewer import viewer_bp
 from .rt_mapper import mapper_bp
+from .rt_modular import modular_bp
 
 blueprints_register = [
     public_bp,
@@ -13,5 +14,6 @@ blueprints_register = [
     function_bp,
     api_bp,
     viewer_bp,
-    mapper_bp
+    mapper_bp,
+    modular_bp
 ]

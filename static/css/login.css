@@ -1,0 +1,186 @@
+/* ================================
+    Login Page Styles
+================================ */
+
+body {
+    background-color: #141414;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Roboto', Arial, sans-serif;
+    color: #f0f0f0;
+}
+
+/* Contenitore principale della pagina di login */
+.login-page {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+}
+
+/* Scheda di login */
+.login-container {
+    z-index: 10;
+    max-width: 400px;
+    width: 100%;
+    padding: 40px 30px;
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+/* Logo */
+.login-logo img {
+    width: 160px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px rgba(252, 198, 48, 0.7));
+}
+
+/* Titolo della pagina di login */
+.login-title {
+    font-size: 30px;
+    color: #fcc630;
+    margin-bottom: 25px;
+    text-align: center;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Campi di input del form */
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.login-form input::placeholder {
+    color: #aaa;
+}
+
+.login-form input:focus {
+    border-color: #fcc630;
+}
+
+/* Bottone principale */
+.btn.primary.large {
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    color: #000;
+    background-color: #fcc630;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(252, 198, 48, 0.6);
+    transition: all 0.3s;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+.btn.primary.large:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(252, 198, 48, 0.8);
+}
+
+/* Footer */
+.login-footer {
+    text-align: center;
+    color: #ddd;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+.signup-link {
+    color: #fcc630;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.signup-link:hover {
+    color: #fff;
+}
+
+/* Sfondo animato */
+.animated-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/background.webp') no-repeat center center/cover;
+    filter: blur(15px) brightness(0.6);
+    animation: backgroundMove 40s infinite linear;
+    z-index: 1;
+    opacity: 0.6;
+}
+
+@keyframes backgroundMove {
+    0% { transform: scale(1) translateX(0); }
+    50% { transform: scale(1.1) translateX(-10%); }
+    100% { transform: scale(1) translateX(0); }
+}
+
+/* Elementi decorativi fluttuanti */
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(252, 198, 48, 0.5);
+    box-shadow: 0 0 20px rgba(252, 198, 48, 0.8);
+    animation: float 12s infinite ease-in-out;
+    opacity: 0.8;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-25px) translateX(15px); }
+}
+
+/* Stile per il bottone dell'occhio nella password */
+.password-group {
+    position: relative;
+    width: 100%;
+}
+
+input[type="password"],
+input[type="text"] {
+    width: calc(100% - 50px);
+    padding-right: 50px;
+    font-size: 16px;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 35%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+}
+
+.toggle-password:hover {
+    color: #fcc630;
+}

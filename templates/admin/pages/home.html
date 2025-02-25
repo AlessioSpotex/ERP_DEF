@@ -1,0 +1,16 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}
+    Dashboard di {{ tenant.name }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-2xl font-semibold text-white mb-4">Benvenuto nella Dashboard di {{ tenant.name }}</h1>
+    <p class="text-lg mb-6">Ciao, <strong>{{ user.nome }} {{ user.cognome }}</strong>!</p>
+
+    <!-- Contenuto specifico della dashboard -->
+    <div class="card">
+        <h2>Dashboard Overview</h2>
+        <p>Qui vedrai tutte le informazioni principali del tuo ERP personalizzato.</p>
+    </div>
+{% endblock %}

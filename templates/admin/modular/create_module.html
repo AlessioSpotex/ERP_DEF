@@ -1,0 +1,174 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<style>
+    .selected {
+    background-color: #fcc630; /* Giallo brillante */
+    color: #000;
+    box-shadow: 0 0 15px rgba(252, 198, 48, 0.8);
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+</style>
+
+<div class="container mx-auto p-6">
+    <h1 class="text-2xl font-bold text-white mb-4">Crea un Nuovo Modulo</h1>
+
+    <form action="{{ url_for('modular.create_module', tenant_name=tenant_name) }}" method="POST" class="bg-gray-800 p-6 rounded-md shadow-md space-y-6">
+        
+        <!-- Nome del Modulo -->
+        <div>
+            <label for="module_name" class="block text-yellow-500 font-semibold mb-1">Nome del Modulo:</label>
+            <input 
+                type="text" 
+                id="module_name" 
+                name="module_name" 
+                class="w-full p-2 rounded bg-gray-700 border border-gray-600 text-white" 
+                placeholder="Inserisci il nome del modulo" 
+                required
+            >
+        </div>
+
+        <!-- Descrizione del Modulo -->
+        <div>
+            <label for="module_description" class="block text-yellow-500 font-semibold mb-1">Descrizione:</label>
+            <textarea 
+                id="module_description" 
+                name="module_description" 
+                rows="4" 
+                class="w-full p-2 rounded bg-gray-700 border border-gray-600 text-white" 
+                placeholder="Descrivi la funzionalità del modulo"
+                required
+            ></textarea>
+        </div>
+
+        <!-- Tipologia del Modulo con Selezione Visiva -->
+        <div>
+            <label class="block text-yellow-500 font-semibold mb-2">Tipologia del Modulo:</label>
+            <div class="flex flex-wrap gap-4">
+                {% for type, label, icon in [
+                    ('table', 'Tabella', 'fas fa-table'),
+                    ('kanban', 'Kanban', 'fas fa-columns'),
+                    ('task', 'Task', 'fas fa-tasks'),
+                    ('workflow', 'Flusso', 'fas fa-project-diagram'),
+                    ('form', 'Form', 'fas fa-file-alt'),
+                    ('dashboard', 'Dashboard', 'fas fa-chart-line')
+                ] %}
+                <label class="cursor-pointer inline-block">
+                    <input 
+                        type="radio" 
+                        name="modular_type" 
+                        value="{{ type }}" 
+                        class="hidden peer" 
+                        required
+                    >
+                    <div class="flex flex-col items-center p-4 w-28 h-28 rounded-lg border border-gray-600 bg-gray-700 text-white module-type-card transition-all">
+                        <i class="{{ icon }} text-3xl mb-2 transition-transform peer-checked:scale-125"></i>
+                        <span class="text-sm font-semibold">{{ label }}</span>
+                    </div>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Configurazione Personalizzata (Interfaccia User-Friendly) -->
+        <div>
+            <label for="module_config" class="block text-yellow-500 font-semibold mb-2">Configurazione Personalizzata:</label>
+            <div class="bg-gray-700 p-4 rounded-md">
+                <p class="text-sm text-gray-400 mb-2">Inserisci le chiavi e i valori per la configurazione personalizzata del modulo:</p>
+                <div id="config-container" class="space-y-2">
+                    <div class="flex space-x-2 items-center">
+                        <input type="text" name="config_keys[]" placeholder="Chiave" class="w-1/3 p-2 rounded bg-gray-600 text-white" />
+                        <input type="text" name="config_values[]" placeholder="Valore" class="w-1/3 p-2 rounded bg-gray-600 text-white" />
+                        <select name="config_types[]" class="w-1/3 p-2 rounded bg-gray-600 text-white">
+                            <option value="string">Testo</option>
+                            <option value="number">Numero</option>
+                            <option value="boolean">Booleano</option>
+                        </select>
+                        <button type="button" class="text-red-500" onclick="removeConfigField(this)">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="button" class="btn secondary mt-2" onclick="addConfigField()">Aggiungi Campo</button>
+            </div>
+        </div>
+
+        <!-- Opzioni Avanzate -->
+        <div class="flex items-center space-x-6">
+            <label class="flex items-center text-white">
+                <input 
+                    type="checkbox" 
+                    name="is_active" 
+                    class="form-checkbox bg-gray-700 text-yellow-500 border-gray-600 mr-2" 
+                    checked
+                >
+                Modulo Attivo
+            </label>
+
+            <label class="flex items-center text-white">
+                <input 
+                    type="checkbox" 
+                    name="is_template" 
+                    class="form-checkbox bg-gray-700 text-yellow-500 border-gray-600 mr-2"
+                >
+                Usa come Template Riutilizzabile
+            </label>
+        </div>
+
+        <!-- Pulsante di Invio -->
+        <div class="flex justify-end">
+            <button type="submit" class="btn primary large">
+                <i class="fas fa-plus mr-2"></i>Crea Modulo
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Script per la gestione dinamica dei campi di configurazione -->
+<script>
+    function addConfigField() {
+        const container = document.getElementById('config-container');
+        const field = document.createElement('div');
+        field.className = 'flex space-x-2 items-center mt-2';
+        field.innerHTML = `
+            <input type="text" name="config_keys[]" placeholder="Chiave" class="w-1/3 p-2 rounded bg-gray-600 text-white" />
+            <input type="text" name="config_values[]" placeholder="Valore" class="w-1/3 p-2 rounded bg-gray-600 text-white" />
+            <select name="config_types[]" class="w-1/3 p-2 rounded bg-gray-600 text-white">
+                <option value="string">Testo</option>
+                <option value="number">Numero</option>
+                <option value="boolean">Booleano</option>
+            </select>
+            <button type="button" class="text-red-500" onclick="removeConfigField(this)">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        `;
+        container.appendChild(field);
+    }
+
+    function removeConfigField(button) {
+        const field = button.parentElement;
+        field.remove();
+    }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const moduleTypeInputs = document.querySelectorAll('input[name="modular_type"]');
+    const moduleTypeCards = document.querySelectorAll('.module-type-card');
+
+    moduleTypeInputs.forEach(input => {
+        input.addEventListener('change', () => {
+            moduleTypeCards.forEach(card => card.classList.remove('selected'));
+            const selectedCard = input.closest('.module-type-card');
+            if (selectedCard) {
+                selectedCard.classList.add('selected');
+            }
+        });
+    });
+});
+</script>
+
+
+{% endblock %}

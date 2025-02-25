@@ -1,0 +1,87 @@
+<!-- Sidebar Professionale e Sottile -->
+<aside class="w-52 bg-black bg-opacity-80 backdrop-blur-md border-r border-gray-800 flex flex-col p-4 space-y-4 rounded-r-3xl shadow-xl h-screen overflow-y-auto">
+    
+    <!-- Logo -->
+    <div class="flex items-center justify-center mb-4">
+        <a href="{{ url_for('pages.homepage', tenant_name=g.tenant.name) }}"><img src="{{ url_for('static', filename='images/ares_logo_white.png') }}" 
+             alt="Ares Management Logo" 
+             class="w-2/3 drop-shadow-md transition-transform hover:scale-105"></a>
+    </div>
+
+    <!-- Menu di Navigazione Dinamico -->
+    <nav class="flex flex-col space-y-1">
+        {% if g.sidebar_menu %}
+            {% for item in g.sidebar_menu %}
+                <a href="{{ item.url }}" 
+                   class="flex items-center p-2 rounded-md transition-colors text-white hover:bg-yellow-500 hover:text-black group">
+                    <i class="{{ item.icon }} mr-3 text-base transition-transform group-hover:scale-110"></i>
+                    <span class="text-xs font-medium whitespace-nowrap">{{ item.name }}</span>
+                </a>
+            {% endfor %}
+        {% else %}
+                <p class="text-gray-500 text-xs p-2">
+                    Nessun modulo disponibile, 
+                    <a href="{{ url_for('modular.create_module', tenant_name=g.tenant.name) }}"
+                       class="text-yellow-500 hover:underline">
+                        Clicca qui
+                    </a> per crearne uno.
+                </p>
+        {% endif %}
+    </nav>
+
+    <div class="flex-grow"></div>
+
+    <!-- Sezione Utente con Dropdown al Clic -->
+    <div class="relative">
+        <button 
+            id="user-menu-button" 
+            class="w-full flex items-center justify-between bg-gray-800 p-2 rounded-md shadow-md hover:bg-gray-700 transition focus:outline-none"
+            onclick="toggleDropdown()"
+        >
+            <span class="flex items-center space-x-2">
+                <!-- Avatar dell'utente -->
+                <img src="{{ g.user.profilo_foto or url_for('static', filename='images/avatar.png') }}" 
+                     alt="Avatar" 
+                     class="w-6 h-6 rounded-full border-2 border-yellow-500">
+                <span class="text-xs">{{ g.user.nome }} {{ g.user.cognome }}</span>
+            </span>
+            <i class="fas fa-chevron-up transition-transform transform" id="chevron-icon"></i>
+        </button>
+        
+        <!-- Dropdown con opzioni utente, attivato al clic -->
+        <div 
+            id="user-dropdown-menu" 
+            class="absolute left-0 bottom-full mb-2 bg-gray-800 rounded-md shadow-lg hidden flex-col z-10"
+        >
+            <a href="#" class="block px-3 py-2 hover:bg-gray-700 text-xs">Profilo di {{ g.user.nome }}</a>
+            <a href="#" class="block px-3 py-2 hover:bg-gray-700 text-xs">Impostazioni Account</a>
+            <a href="{{ url_for('pages.logout_page', tenant_name=g.tenant.name) }}" 
+               class="block px-3 py-2 hover:bg-red-600 text-xs transition-colors">Logout</a>
+        </div>
+    </div>
+</aside>
+
+<!-- Script per il Dropdown al Clic -->
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('user-dropdown-menu');
+        const chevron = document.getElementById('chevron-icon');
+        
+        // Toggle la visibilità del dropdown
+        dropdown.classList.toggle('hidden');
+        
+        // Ruota l'icona del chevron
+        chevron.classList.toggle('rotate-180');
+    }
+
+    // Chiudi il dropdown se si clicca fuori
+    window.addEventListener('click', function(e) {
+        const dropdown = document.getElementById('user-dropdown-menu');
+        const button = document.getElementById('user-menu-button');
+        
+        if (!button.contains(e.target)) {
+            dropdown.classList.add('hidden');
+            document.getElementById('chevron-icon').classList.remove('rotate-180');
+        }
+    });
+</script>

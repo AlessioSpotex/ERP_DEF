@@ -6,3 +6,6 @@ from .widget import Widget
 from .viewer import Viewer
 from .editor import Editor
 from .tenant import Tenant
+from .modularfield import ModularField
+from .modularrecord import ModularRecord
+from .modularworkflow import ModularWorkflow

@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - {{ tenant.name }}</title>
+    
     <!-- Stili e Icone -->
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon_ares.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -15,17 +16,23 @@
         <div class="login-container">
             <div class="login-card">
                 <div class="login-logo">
-                    <img src="{{ url_for('static', filename='media/ares_logo_white.png') }}" alt="Ares Management Logo">
+                    <a href="{{ url_for('public.homepage') }}"><img src="{{ url_for('static', filename='images/ares_logo_white.png') }}" alt="Ares Management Logo"></a>
                 </div>
-                <h2 class="login-title">Accedi a </h2>
+                    <h2 class="login-title">Accedi a <strong style="color: silver;">{{ tenant.name }}</strong></h2>
                 
                 <!-- Form di Login -->
-                <form action="/login" method="POST" class="login-form">
-                    <input type="text" name="email" placeholder="Email" required>
-                    <input type="password" name="password" placeholder="Password" required>
+                <form action="/{{ tenant.name }}/login" method="POST" class="login-form">
+                    <div class="input-group">
+                        <input type="text" name="username" placeholder="Nome utente" required>
+                    </div>
+                    <div class="input-group password-group">
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                        <span class="toggle-password" onclick="togglePassword()">
+                            <i class="fas fa-eye" id="eyeIcon"></i>
+                        </span>
+                    </div>
                     <button type="submit" class="btn primary large">Accedi</button>
                 </form>
-
 
                 <p class="login-footer">
                     Non hai un account? <a href="#" class="signup-link">Contatta il nostro Ufficio Vendite</a>
@@ -46,13 +53,22 @@
         </div>
     </section>
 
-    <!-- Script per ottenere il nome del tenant dall'URL -->
+    <!-- Script per visualizzare la password -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const pathParts = window.location.pathname.split('/');
-            const tenantName = pathParts[1] || 'Ares Management';
-            document.getElementById('tenantName').textContent = tenantName.charAt(0).toUpperCase() + tenantName.slice(1);
-        });
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
     </script>
 </body>
 </html>
