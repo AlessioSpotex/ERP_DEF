@@ -19,7 +19,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inizializza il database e la migrazione
 from models.database import db
-from models import User, Modular, Mode, Kanban, Widget, Viewer, Editor, Tenant
+from models import User, Modular, Mode, Kanban, Widget, Viewer, Editor, Tenant, ModularField, ModularRecord, ModularWorkflow
 db.init_app(app)
 migrate = Migrate(app, db)
 

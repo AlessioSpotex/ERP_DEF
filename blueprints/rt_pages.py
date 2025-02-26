@@ -31,6 +31,7 @@ def login_post(tenant_name):
     # Salva l'utente nella sessione
     session['user_id'] = user.id
     session['tenant_name'] = tenant_name
+    session['tenant_id'] = tenant.id
 
     # Reindirizza direttamente alla dashboard
     return redirect(url_for('pages.homepage', tenant_name=tenant_name))

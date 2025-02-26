@@ -4,8 +4,8 @@ from models import User, Tenant, Modular, Mode, Kanban, Widget, Viewer, Editor
 with app.app_context():
     try:
         # Elimina tutti i record dalle tabelle del database
-        db.session.query(User).delete()
-        db.session.query(Tenant).delete()
+        #db.session.query(User).delete()
+        #db.session.query(Tenant).delete()
         db.session.query(Modular).delete()
         db.session.query(Mode).delete()
         db.session.query(Kanban).delete()

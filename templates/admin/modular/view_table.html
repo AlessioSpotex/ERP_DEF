@@ -1,0 +1,200 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<!-- view_table.html -->
+<div class="container mx-auto p-6">
+    <h1 class="text-2xl font-bold text-white mb-4">Vista Tabella: {{ module.name }}</h1>
+
+    <!-- Barra Azioni -->
+    <div class="flex items-center justify-between mb-4 bg-gray-800 p-4 rounded-md">
+        <div class="flex space-x-2">
+            <button class="btn primary" onclick="addNewRow()"><i class="fas fa-plus mr-2"></i>Nuovo</button>
+            <button class="btn secondary" onclick="filterRows()"><i class="fas fa-filter mr-2"></i>Filtra</button>
+            <button class="btn secondary" onclick="setView()"><i class="fas fa-eye mr-2"></i>Imposta Vista</button>
+            <button class="btn warning" onclick="exportData()"><i class="fas fa-file-export mr-2"></i>Esporta</button>
+            <button class="btn danger" onclick="deleteSelectedRows()"><i class="fas fa-trash mr-2"></i>Cancella</button>
+        </div>
+        <input type="text" id="search-input" class="p-2 bg-gray-700 text-white rounded-md" placeholder="Cerca..." oninput="searchTable()">
+    </div>
+
+    <!-- Tabella Dinamica -->
+    <div class="overflow-x-auto bg-gray-800 rounded-md">
+        <table class="min-w-full table-auto">
+            <thead class="bg-gray-700">
+                <tr>
+                    <th class="p-2 text-left text-yellow-500">
+                        <input type="checkbox" id="select-all" onclick="toggleSelectAll()">
+                    </th>
+                    {% for field in fields %}
+                        <th class="p-2 text-left text-yellow-500">{{ field.name }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                {% for record in records %}
+                <tr class="hover:bg-gray-600 transition-colors" 
+                    ondblclick="editRow({{ record.id }})" 
+                    oncontextmenu="showContextMenu(event, {{ record.id }})" 
+                    data-row-id="{{ record.id }}">
+                    <td class="p-2"><input type="checkbox" class="row-checkbox"></td>
+                    {% for field in fields %}
+                        <td class="p-2">{{ record.data.get(field.name, '') }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Script per funzionalità avanzate della tabella -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const table = document.getElementById('dynamic-table');
+    const tbody = table.querySelector('tbody');
+    const selectionBox = document.getElementById('selection-box');
+    let isSelecting = false;
+    let selectedRows = new Set();
+
+    // Toolbar actions
+    document.getElementById('btn-new').addEventListener('click', addNewRow);
+    document.getElementById('btn-delete').addEventListener('click', deleteSelectedRows);
+    document.getElementById('btn-export').addEventListener('click', exportTableData);
+    document.getElementById('btn-filter').addEventListener('click', () => alert('Apertura pannello filtri...'));
+    document.getElementById('btn-view-settings').addEventListener('click', () => alert('Impostazione della vista...'));
+
+    // Selezione multipla delle righe con il mouse
+    tbody.addEventListener('mousedown', (e) => {
+        if (e.target.tagName === 'TD') {
+            isSelecting = true;
+            const row = e.target.parentNode;
+            toggleRowSelection(row);
+        }
+    });
+
+    tbody.addEventListener('mouseover', (e) => {
+        if (isSelecting && e.target.tagName === 'TD') {
+            const row = e.target.parentNode;
+            toggleRowSelection(row);
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isSelecting = false;
+    });
+
+    // Doppio click per modificare una riga
+    tbody.addEventListener('dblclick', (e) => {
+        if (e.target.tagName === 'TD') {
+            const row = e.target.parentNode;
+            editRow(row);
+        }
+    });
+
+    // Menu contestuale con il tasto destro del mouse
+    tbody.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        if (e.target.tagName === 'TD') {
+            const row = e.target.parentNode;
+            showContextMenu(e, row);
+        }
+    });
+
+    // Selezione/Deselezione delle righe
+    function toggleRowSelection(row) {
+        const rowId = row.dataset.id;
+        row.classList.toggle('bg-yellow-100');
+        if (selectedRows.has(rowId)) {
+            selectedRows.delete(rowId);
+        } else {
+            selectedRows.add(rowId);
+        }
+    }
+
+    // Aggiunta di una nuova riga
+    function addNewRow() {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td class="p-2 border"><input type="text" placeholder="ID" class="w-full bg-gray-100"></td>
+            <td class="p-2 border"><input type="text" placeholder="Nome" class="w-full bg-gray-100"></td>
+            <td class="p-2 border"><input type="text" placeholder="Descrizione" class="w-full bg-gray-100"></td>
+            <td class="p-2 border"><input type="text" placeholder="Stato" class="w-full bg-gray-100"></td>
+        `;
+        tbody.prepend(newRow);
+    }
+
+    // Eliminazione delle righe selezionate
+    function deleteSelectedRows() {
+        if (selectedRows.size > 0 && confirm('Vuoi davvero eliminare le righe selezionate?')) {
+            selectedRows.forEach(rowId => {
+                const row = document.querySelector(`tr[data-id="${rowId}"]`);
+                if (row) row.remove();
+            });
+            selectedRows.clear();
+        }
+    }
+
+    // Esportazione dei dati della tabella in formato CSV
+    function exportTableData() {
+        const rows = [...table.querySelectorAll('tr')];
+        const csvContent = rows.map(row => {
+            const cells = [...row.querySelectorAll('th, td')];
+            return cells.map(cell => cell.innerText).join(',');
+        }).join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'tabella_dinamica.csv';
+        link.click();
+
+        URL.revokeObjectURL(url);
+    }
+
+    // Modifica di una riga con doppio click
+    function editRow(row) {
+        const cells = row.querySelectorAll('td');
+        cells.forEach(cell => {
+            const currentValue = cell.innerText;
+            cell.innerHTML = `<input type="text" value="${currentValue}" class="w-full bg-gray-100">`;
+        });
+
+        row.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                saveRow(row);
+            }
+        });
+    }
+
+    // Salvataggio della riga modificata
+    function saveRow(row) {
+        const inputs = row.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.parentElement.innerText = input.value;
+        });
+    }
+
+    // Menu contestuale personalizzato per le righe
+    function showContextMenu(event, row) {
+        const contextMenu = document.getElementById('context-menu');
+        contextMenu.style.display = 'block';
+        contextMenu.style.top = `${event.clientY}px`;
+        contextMenu.style.left = `${event.clientX}px`;
+
+        document.addEventListener('click', () => {
+            contextMenu.style.display = 'none';
+        });
+
+        document.getElementById('context-edit').onclick = () => editRow(row);
+        document.getElementById('context-delete').onclick = () => {
+            if (confirm('Vuoi davvero eliminare questa riga?')) {
+                row.remove();
+            }
+        };
+    }
+});
+</script>
+{% endblock %}

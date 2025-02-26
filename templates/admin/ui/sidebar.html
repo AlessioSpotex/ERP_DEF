@@ -13,20 +13,29 @@
         {% if g.sidebar_menu %}
             {% for item in g.sidebar_menu %}
                 <a href="{{ item.url }}" 
-                   class="flex items-center p-2 rounded-md transition-colors text-white hover:bg-yellow-500 hover:text-black group">
+                class="flex items-center p-2 rounded-md transition-colors text-white hover:bg-yellow-500 hover:text-black group">
                     <i class="{{ item.icon }} mr-3 text-base transition-transform group-hover:scale-110"></i>
                     <span class="text-xs font-medium whitespace-nowrap">{{ item.name }}</span>
                 </a>
             {% endfor %}
-        {% else %}
-                <p class="text-gray-500 text-xs p-2">
-                    Nessun modulo disponibile, 
-                    <a href="{{ url_for('modular.create_module', tenant_name=g.tenant.name) }}"
-                       class="text-yellow-500 hover:underline">
-                        Clicca qui
-                    </a> per crearne uno.
-                </p>
         {% endif %}
+
+        <!-- Sezione Moduli Personalizzati -->
+        <div class="mt-4">
+            <p class="text-gray-400 text-sm mb-2">Moduli Personalizzati</p>
+            <div id="dynamic-modules" class="flex flex-col space-y-1">
+                <!-- I moduli verranno caricati qui tramite AJAX -->
+            </div>
+
+            <p class="text-gray-500 text-xs p-2 hidden" id="no-modules-message">
+                Nessun modulo disponibile, 
+                <a href="{{ url_for('modular.create_module', tenant_name=g.tenant.name) }}"
+                class="text-yellow-500 hover:underline">
+                    Clicca qui
+                </a> per crearne uno.
+            </p>
+        </div>
+
     </nav>
 
     <div class="flex-grow"></div>
@@ -83,5 +92,43 @@
             dropdown.classList.add('hidden');
             document.getElementById('chevron-icon').classList.remove('rotate-180');
         }
+    });
+</script>
+<!-- Script per elenco moduli -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tenantName = "{{ g.tenant.name }}";
+        const dynamicModulesContainer = document.getElementById('dynamic-modules');
+        const noModulesMessage = document.getElementById('no-modules-message');
+
+        fetch(`/` + tenantName + `/modular/get_modules`)
+            .then(response => response.json())
+            .then(data => {
+                dynamicModulesContainer.innerHTML = ''; // Pulisce il contenitore
+                
+                if (data.length > 0) {
+                    data.forEach(module => {
+                        const moduleLink = document.createElement('a');
+
+                        // Costruisce la URL dinamica in base al tipo di modulo
+                        const viewType = module.type.toLowerCase(); // Es. "kanban", "table", "task", ecc.
+                        moduleLink.href = `/` + tenantName + `/modular/view/` + viewType + `/` + module.id;
+                        
+                        moduleLink.className = 'flex items-center p-2 rounded-md transition-colors text-white hover:bg-yellow-500 hover:text-black group';
+                        moduleLink.innerHTML = `
+                            <i class="fas fa-cube mr-3 text-base transition-transform group-hover:scale-110"></i>
+                            <span class="text-xs font-medium whitespace-nowrap">${module.name}</span>
+                        `;
+                        dynamicModulesContainer.appendChild(moduleLink);
+                    });
+                    noModulesMessage.classList.add('hidden');
+                } else {
+                    noModulesMessage.classList.remove('hidden');
+                }
+            })
+            .catch(error => {
+                console.error('Errore nel caricamento dei moduli:', error);
+                noModulesMessage.classList.remove('hidden');
+            });
     });
 </script>
