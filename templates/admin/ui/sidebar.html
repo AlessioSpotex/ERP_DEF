@@ -31,10 +31,17 @@
                 Nessun modulo disponibile, 
                 <a href="{{ url_for('modular.create_module', tenant_name=g.tenant.name) }}"
                 class="text-yellow-500 hover:underline">
-                    Clicca qui
+                    Clicca Sotto
                 </a> per crearne uno.
             </p>
         </div>
+
+        <a href="{{ url_for('modular.create_module', tenant_name=g.tenant.name) }}"
+        class="flex items-center p-2 rounded-md transition-colors text-white bg-indigo-600 hover:bg-indigo-500 group">
+         <i class="fas fa-plus mr-3 text-base transition-transform group-hover:scale-110"></i>
+         <span class="text-xs font-medium whitespace-nowrap">Crea nuovo</span>
+        </a>
+
 
     </nav>
 

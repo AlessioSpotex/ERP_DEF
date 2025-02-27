@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify
+import json
 from models.database import db 
 from models import Modular, ModularField, ModularRecord, ModularWorkflow, Tenant
 from auth import check_user_authentication
@@ -48,31 +49,6 @@ def create_module(tenant_name):
     )
     
     db.session.add(new_module)
-    db.session.commit()
-
-    # Creazione dei campi del modulo (ModularFields)
-    field_names = request.form.getlist('field_names[]')
-    field_types = request.form.getlist('field_types[]')
-    field_required = request.form.getlist('field_required[]')
-    field_configs = request.form.getlist('field_configs[]')
-    
-    for name, ftype, required, config in zip(field_names, field_types, field_required, field_configs):
-        field_config = None
-        if config:
-            try:
-                field_config = jsonify.loads(config)
-            except ValueError:
-                flash(f'Configurazione del campo "{name}" non valida.', 'error')
-        
-        new_field = ModularField(
-            name=name,
-            field_type=ftype,
-            is_required=(required == 'on'),
-            config=field_config,
-            modular_id=new_module.id
-        )
-        db.session.add(new_field)
-
     db.session.commit()
     
     flash('Modulo creato con successo!', 'success')

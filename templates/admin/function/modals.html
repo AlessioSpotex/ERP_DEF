@@ -1,0 +1,61 @@
+<!-- Modale per Configurazione JSON -->
+<div id="config-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50" style="padding: 30px;">
+    <div class="bg-gray-800 p-6 rounded-md w-1/2 space-y-4 relative">
+        <h2 class="text-2xl font-bold text-yellow-500 mb-4">Configurazione Avanzata</h2>
+
+        <!-- Contenuto dinamico del modale -->
+        <div id="modal-config-container" class="space-y-4"></div>
+
+        <!-- Area di visualizzazione del JSON generato -->
+        <div>
+            <label class="block text-yellow-500 mb-1">Anteprima JSON:</label>
+            <textarea id="config-preview" class="w-full p-2 bg-gray-700 text-white rounded-md" rows="4" readonly></textarea>
+        </div>
+
+        <!-- Pulsanti del Modale -->
+        <div class="flex justify-between mt-4">
+            <button type="button" class="btn danger" onclick="closeConfigModal()">Annulla</button>
+            <button type="button" class="btn primary" onclick="applyConfigToField()">Salva Configurazione</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Apri il modale per la configurazione personalizzata
+    function openConfigModal(button) {
+        activeConfigInput = button.closest('.flex').querySelector('.config-json');
+        document.getElementById('config-modal').classList.remove('hidden');
+    }
+    
+    // Chiudi il modale
+    function closeConfigModal() {
+        document.getElementById('config-modal').classList.add('hidden');
+        activeConfigInput = null;
+    }
+    
+    // Carica un template JSON dall'elenco
+    async function loadJsonTemplate(selectElement) {
+        const jsonUrl = selectElement.value;
+        if (!jsonUrl) return;
+    
+        try {
+            const response = await fetch(jsonUrl);
+            if (!response.ok) {
+                throw new Error('Impossibile caricare il template JSON');
+            }
+    
+            const jsonData = await response.json();
+            const jsonString = JSON.stringify(jsonData, null, 2);
+    
+            // Inserisce il JSON direttamente nell'input nascosto associato
+            const configInput = selectElement.closest('.flex').querySelector('.config-json');
+            configInput.value = jsonString;
+    
+            alert('Template JSON caricato con successo!');
+            selectElement.selectedIndex = 0; // Resetta il selettore
+        } catch (error) {
+            console.error('Errore nel caricamento del template JSON:', error);
+            alert('Errore nel caricamento del template JSON.');
+        }
+    }
+    </script>

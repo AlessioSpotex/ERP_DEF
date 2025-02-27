@@ -3,12 +3,20 @@
 {% block content %}
 
 <style>
-    .selected {
+    /* Stile per lo stato "selezionato" */
+    .module-type-card.selected {
         background-color: #fcc630; /* Giallo brillante */
         color: #000;
+        border-color: #fcc630;
         box-shadow: 0 0 15px rgba(252, 198, 48, 0.8);
-        transform: scale(1.1);
+        transform: scale(1.05);
         transition: all 0.3s ease;
+    }
+    .module-type-card i.selected {
+        color: #000;
+    }
+    .module-type-card:hover {
+        transform: scale(1.1);
     }
 </style>
 
@@ -60,103 +68,60 @@
                         type="radio" 
                         name="modular_type" 
                         value="{{ type }}" 
-                        class="hidden peer" 
+                        class="hidden peer"
                         required
+                        onclick="selectModuleType(this)"
                     >
                     <div class="flex flex-col items-center p-4 w-28 h-28 rounded-lg border border-gray-600 bg-gray-700 text-white module-type-card transition-all">
-                        <i class="{{ icon }} text-3xl mb-2 transition-transform peer-checked:scale-125"></i>
+                        <i class="{{ icon }} text-3xl mb-2 transition-transform"></i>
                         <span class="text-sm font-semibold">{{ label }}</span>
                     </div>
                 </label>
                 {% endfor %}
             </div>
+            <br>
+            <!-- Opzioni Avanzate -->
+               <div class="flex items-center space-x-6">
+                   <label class="flex items-center text-white">
+                       <input 
+                           type="checkbox" 
+                           name="is_active" 
+                           class="form-checkbox bg-gray-700 text-yellow-500 border-gray-600 mr-2" 
+                           checked
+                       >
+                       Modulo Attivo
+                   </label>
+    
+                   <label class="flex items-center text-white">
+                       <input 
+                           type="checkbox" 
+                           name="is_template" 
+                           class="form-checkbox bg-gray-700 text-yellow-500 border-gray-600 mr-2"
+                       >
+                       Usa come Template Riutilizzabile
+                   </label>
         </div>
 
-        <!-- Campi del Modulo -->
-        <div>
-            <label for="module_fields" class="block text-yellow-500 font-semibold mb-2">Campi del Modulo:</label>
-            <div id="fields-container" class="space-y-2">
-                <div class="flex space-x-2 items-center">
-                    <input type="text" name="field_names[]" placeholder="Nome Campo" class="w-1/4 p-2 rounded bg-gray-600 text-white" required />
-                    <select name="field_types[]" class="w-1/4 p-2 rounded bg-gray-600 text-white" required>
-                        <option value="text">Testo</option>
-                        <option value="number">Numero</option>
-                        <option value="date">Data</option>
-                        <option value="select">Selezione</option>
-                        <option value="checkbox">Checkbox</option>
-                        <option value="relation">Relazione</option>
-                    </select>
-                    <input type="checkbox" name="field_required[]" class="form-checkbox bg-gray-700 text-yellow-500 border-gray-600 mr-2" />
-                    <label class="text-white">Obbligatorio</label>
-                    <input type="text" name="field_configs[]" placeholder='Configurazione JSON' class="w-1/3 p-2 rounded bg-gray-600 text-white" />
-                    <button type="button" class="text-red-500" onclick="removeField(this)">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                </div>
-            </div>
-            <button type="button" class="btn secondary mt-2" onclick="addField()">Aggiungi Campo</button>
-        </div>
 
-        <!-- Opzioni Avanzate -->
-        <div class="flex items-center space-x-6">
-            <label class="flex items-center text-white">
-                <input 
-                    type="checkbox" 
-                    name="is_active" 
-                    class="form-checkbox bg-gray-700 text-yellow-500 border-gray-600 mr-2" 
-                    checked
-                >
-                Modulo Attivo
-            </label>
-
-            <label class="flex items-center text-white">
-                <input 
-                    type="checkbox" 
-                    name="is_template" 
-                    class="form-checkbox bg-gray-700 text-yellow-500 border-gray-600 mr-2"
-                >
-                Usa come Template Riutilizzabile
-            </label>
-        </div>
 
         <!-- Pulsante di Invio -->
         <div class="flex justify-end">
-            <button type="submit" class="btn primary large">
+            <button type="submit" class="font-bold py-2 px-4 rounded bg-blue-500 text-white">
                 <i class="fas fa-plus mr-2"></i>Crea Modulo
             </button>
         </div>
     </form>
 </div>
 
-<!-- Script per la gestione dinamica dei campi di configurazione -->
 <script>
-    function addField() {
-        const container = document.getElementById('fields-container');
-        const field = document.createElement('div');
-        field.className = 'flex space-x-2 items-center mt-2';
-        field.innerHTML = `
-            <input type="text" name="field_names[]" placeholder="Nome Campo" class="w-1/4 p-2 rounded bg-gray-600 text-white" required />
-            <select name="field_types[]" class="w-1/4 p-2 rounded bg-gray-600 text-white" required>
-                <option value="text">Testo</option>
-                <option value="number">Numero</option>
-                <option value="date">Data</option>
-                <option value="select">Selezione</option>
-                <option value="checkbox">Checkbox</option>
-                <option value="relation">Relazione</option>
-            </select>
-            <input type="checkbox" name="field_required[]" class="form-checkbox bg-gray-700 text-yellow-500 border-gray-600 mr-2" />
-            <label class="text-white">Obbligatorio</label>
-            <input type="text" name="field_configs[]" placeholder='Configurazione JSON' class="w-1/3 p-2 rounded bg-gray-600 text-white" />
-            <button type="button" class="text-red-500" onclick="removeField(this)">
-                <i class="fas fa-trash-alt"></i>
-            </button>
-        `;
-        container.appendChild(field);
-    }
-
-    function removeField(button) {
-        button.parentElement.remove();
+    function selectModuleType(input) {
+        const allCards = document.querySelectorAll('.module-type-card');
+        allCards.forEach(card => card.classList.remove('selected'));
+        
+        const selectedCard = input.closest('label').querySelector('.module-type-card');
+        selectedCard.classList.add('selected');
     }
 </script>
 
 {% endblock %}
+
